@@ -33,6 +33,8 @@ namespace Calculator
         {
             if(!isCalculated)
             {
+                val1Entered = true;
+
                 if (inputBox.Text != "0")
                 {
                     inputBox.Text = inputBox.Text + ((Button)sender).Text;
@@ -59,18 +61,11 @@ namespace Calculator
 
         private void Operate(object sender, EventArgs e)
         {
-            if((inputBox.Text != "0") && (!val1Entered))
+            if(val1Entered)
             {
                 value1 = Convert.ToDecimal(inputBox.Text);
                 operationType = ((Button)sender).Name;
-                inputBox.Text = null;
-                val1Entered = true;  
-                
-            }
-
-            if(inputBox.Text == null)
-            {
-                inputBox.Text = "Error";
+                inputBox.Text = null; 
             }
         }
 
