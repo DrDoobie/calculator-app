@@ -22,8 +22,6 @@ namespace Calculator
         public Calculator()
         {
             InitializeComponent();
-
-            inputBox.Text = "0";
         }
 
         private void Calculator_Load(object sender, EventArgs e)
@@ -39,9 +37,7 @@ namespace Calculator
                 {
                     inputBox.Text = inputBox.Text + ((Button)sender).Text;
 
-                }
-                else
-                {
+                } else {
                     inputBox.Text = ((Button)sender).Text;
                 }
             }
@@ -72,7 +68,7 @@ namespace Calculator
                 
             }
 
-            if(inputBox.Text == "0")
+            if(inputBox.Text == null)
             {
                 inputBox.Text = "Error";
             }
