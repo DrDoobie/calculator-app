@@ -12,29 +12,95 @@ namespace Calculator
 {
     public partial class Calculator : Form
     {
+
+        private bool isCalculated;
+        private bool val1Entered;
+        private decimal value1, value2;
+        private string operationType;
+        decimal result;
+
         public Calculator()
         {
             InitializeComponent();
+
+            inputBox.Text = "0";
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void Calculator_Load(object sender, EventArgs e)
         {
-
+            
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void InputNumber(object sender, EventArgs e)
         {
+            if(!isCalculated)
+            {
+                if (inputBox.Text != "0")
+                {
+                    inputBox.Text = inputBox.Text + ((Button)sender).Text;
 
+                }
+                else
+                {
+                    inputBox.Text = ((Button)sender).Text;
+                }
+            }
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void Clear(object sender, EventArgs e)
         {
+            if(inputBox.Text != null)
+            {
+                inputBox.Text = null;
+                val1Entered = false;
 
+                value1 = 0;
+                value2 = 0;
+
+                isCalculated = false;
+            }
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void Operate(object sender, EventArgs e)
         {
+            if((inputBox.Text != "0") && (!val1Entered))
+            {
+                value1 = Convert.ToDecimal(inputBox.Text);
+                operationType = ((Button)sender).Name;
+                inputBox.Text = null;
+                val1Entered = true;  
+                
+            }
 
+            if(inputBox.Text == "0")
+            {
+                inputBox.Text = "Error";
+            }
+        }
+
+        private void Calculate(object sender, EventArgs e)
+        {
+            if (inputBox.Text != null && !isCalculated && val1Entered)
+            {
+                value2 = Convert.ToDecimal(inputBox.Text);
+
+                if(operationType == "add")
+                {
+                    result = value1 + value2;
+
+                } else if(operationType == "subtract") {
+                    result = value1 - value2;
+
+                } else if(operationType == "multiply") {
+                    result = value1 * value2;
+
+                } else if(operationType == "divide") {
+                    result = value1 / value2;
+                }
+
+                isCalculated = true;
+                inputBox.Text = result.ToString();
+            }
         }
     }
 }
